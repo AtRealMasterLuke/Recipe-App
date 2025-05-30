@@ -14,5 +14,5 @@ val recipeService = com.example.biteflix.retrofit.create(APIServices::class.java
 
 interface APIServices {
     @GET("categories.php")
-    suspend fun getCategories(): CategoriesResponse //returns objects of type CategoriesResponse
+    suspend fun getCategories(): CategoriesResponse // This function makes a network request to https://www.themealdb.com/api/json/v1/1/categories.php and returns objects of type CategoriesResponse
 }
