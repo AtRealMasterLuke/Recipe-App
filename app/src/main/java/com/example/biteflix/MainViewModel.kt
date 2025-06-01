@@ -1,5 +1,6 @@
 package com.example.biteflix
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,7 @@ class MainViewModel : ViewModel() {
                 )
 
             } catch (e: Exception){
+                Log.e("MainViewModel", "Error fetching categories", e)
                 _categoryState.value = _categoryState.value.copy( // copy is used to create a new state based on the existing one, updating only the loading and error fields.
                     loading = false, // means the loading has stopped.
                     error = "Error fetching categories ${e.message}"

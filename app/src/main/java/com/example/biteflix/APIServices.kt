@@ -10,7 +10,7 @@ private val retrofit = // Stores the Retrofit instance in a private variable so 
         .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create()) // Tells Retrofit to use Gson to automatically convert JSON responses into Kotlin data classes.
         .build() // Builds the final Retrofit instance, ready to use.
 
-val recipeService = com.example.biteflix.retrofit.create(APIServices::class.java) // tells Retrofit to create an implementation of the APIServices interface
+val recipeService = retrofit.create(APIServices::class.java) // tells Retrofit to create an implementation of the APIServices interface
 
 interface APIServices {
     @GET("categories.php")
