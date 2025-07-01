@@ -1,6 +1,7 @@
 package com.example.biteflix
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -24,7 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun RecipeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier, navigateToCategoryDetails: (Category) -> Unit
 ){
     val recipeViewModel: MainViewModel = viewModel()
     val viewState by recipeViewModel.categoriesState
@@ -41,27 +42,30 @@ fun RecipeScreen(
             }
             //Display categories
             else ->{
-                CategoryScreen(categories = viewState.list)
+                CategoryScreen(categories = viewState.list, navigateToCategoryDetails)
             }
         }
     }
 }
 
 @Composable
-fun CategoryScreen(categories: List<Category>){
+fun CategoryScreen(categories: List<Category>, navigateToCategoryDetails: (Category) -> Unit){
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories){
-            category -> CategoryItem(category = category)
+            category -> CategoryItem(category = category, navigateToCategoryDetails)
         }
     }
 }
 
 //How each item appears
 @Composable
-fun CategoryItem(category: Category){
+fun CategoryItem(category: Category, navigateToCategoryDetails: (Category) -> Unit){
     Column(modifier = Modifier
         .padding(8.dp)
-        .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        .fillMaxSize()
+        //what should happen when we click on the column composable
+        .clickable { navigateToCategoryDetails(category) }
+        , horizontalAlignment = Alignment.CenterHorizontally) {
 
         //How the image's gonna appear
         Image(painter = rememberAsyncImagePainter(category.strCategoryThumb),
