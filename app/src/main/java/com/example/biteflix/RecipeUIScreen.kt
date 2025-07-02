@@ -25,10 +25,10 @@ import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun RecipeScreen(
-    modifier: Modifier = Modifier, navigateToCategoryDetails: (Category) -> Unit
+    modifier: Modifier = Modifier, viewState: MainViewModel.RecipeState,navigateToCategoryDetails: (Category) -> Unit
 ){
-    val recipeViewModel: MainViewModel = viewModel()
-    val viewState by recipeViewModel.categoriesState
+
+
     
     Box(modifier = Modifier.fillMaxSize()){
         //while loading display the `CircularProgressIndicator` otherwise display the categories
